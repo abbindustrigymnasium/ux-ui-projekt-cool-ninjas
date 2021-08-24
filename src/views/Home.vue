@@ -1,6 +1,7 @@
 <template>
   <div>
     <h1>Home</h1>
+    
     <div v-for="cake in cakes" v-bind:key="cake.id">
     <div>
         <router-link :to="'item/' + cake.id">{{cake.title}}</router-link>
@@ -11,7 +12,6 @@
 </template>
 
 <script>
-//import rawData from '../../db.json'
 import axios from 'axios'
 
 export default {
@@ -22,7 +22,10 @@ export default {
       }
   },
   mounted () {
-    axios.get('http://localhost:3000/cakes').then(response => (this.cakes = response.data))
+    axios
+    .get('http://localhost:3000/cakes')
+    .then(response => (this.cakes = response.data))
+    .catch(error => console.log(error))
   }
 }
 </script>

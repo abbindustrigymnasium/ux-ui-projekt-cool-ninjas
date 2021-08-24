@@ -1,9 +1,5 @@
 <template>
   <div id="app">
-    <!-- <div v-for="data in db" v-bind:key="data.id">
-      <p>{{data.title}}</p>
-      <img :src="data.image" alt="cakes">
-    </div> -->
     <router-view></router-view>
   </div>
 </template>
@@ -14,7 +10,6 @@ import json from '../db.json'
 export default {
   name: 'App',
   components: {
-    // hej
   },
   data() {
     return {
@@ -22,8 +17,6 @@ export default {
     }
   }
 }
-
-//console.log(this.db)
 </script>
 
 <style>

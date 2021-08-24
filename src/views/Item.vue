@@ -1,10 +1,15 @@
 <template>
 <div>
   <h1>Item</h1>
-  <h3>{{cake ? cake.title : 'Loading...'}}</h3>
-  <img v-if="cake" :src="cake.image" alt="Cake">
-  <p>{{cake ? cake.detailDescription : 'Loading...'}}</p>
-  <router-link to="/">Home</router-link>
+  <template v-if="error">
+    <h3>Error</h3>
+  </template>
+  <template v-else>
+    <h3>{{loading ? 'Loading...' : cake.title}}</h3>
+    <img v-if="!loading" :src="cake.image" alt="Cake">
+    <p>{{loading ? 'Loading...' : cake.detailDescription}}</p>
+    <router-link to="/">Home</router-link>
+  </template>
 </div>
 </template>
 
@@ -16,11 +21,22 @@ export default {
   data() {
       return {
           cake: null,
-          id: this.$route.params.id
+          id: this.$route.params.id,
+          error: false,
+          loading: true
       }
   },
   mounted() {
-    axios.get('http://localhost:3000/cakes?id=' + this.id).then(response => (this.cake = response.data[0]))
+    axios
+    .get('http://localhost:3000/cakes?id=' + this.id)
+    .then(response => {
+      this.cake = response.data[0]
+    })
+    .catch(error => {
+      console.log(error)
+      this.error = true
+    })
+    .finally(() => this.loading = false)
   }
 }
 </script>
