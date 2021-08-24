@@ -1,19 +1,29 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <!-- <div v-for="data in db" v-bind:key="data.id">
+      <p>{{data.title}}</p>
+      <img :src="data.image" alt="cakes">
+    </div> -->
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import json from '../db.json'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    // hej
+  },
+  data() {
+    return {
+      db: json.cakes,
+    }
   }
 }
+
+//console.log(this.db)
 </script>
 
 <style>

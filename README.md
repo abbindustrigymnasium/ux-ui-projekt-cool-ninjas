@@ -1,4 +1,4 @@
-# ux-ui-projekt-cool-ninjas
+# uiux
 
 ## Project setup
 ```
