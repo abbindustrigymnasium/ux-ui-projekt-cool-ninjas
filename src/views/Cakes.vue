@@ -1,7 +1,7 @@
 <template>
   <div class="cakes">
     <div class="container" v-if="cakes">
-      <vs-card v-for="cake in cakes" :key="cake.id">
+      <vs-card v-for="cake in cakes.data" :key="cake.id">
         <!-- openDetailView kallas tre gånger. fy fan -->
         <template #title>
           <h3 @click="openDetailView(cake.id)">{{ cake.title }}</h3>
@@ -17,33 +17,15 @@
         </template>
         <template #interactions>
           <vs-button-group>
-            <vs-button
-              :disabled="amount == 0"
-              danger
-              class="interact-button"
-              @click="amount--"
-            >
+            <vs-button :disabled="cake.amount == 0" danger class="interact-button" @click="cake.amount--">
               <i class="bx bx-minus"></i>
             </vs-button>
-            <vs-button shadow disabled class="item-count">
-              {{ amount }}
-            </vs-button>
-            <vs-button
-              :disabled="amount == 10"
-              success
-              class="interact-button"
-              @click="amount++"
-            >
+            <vs-button shadow disabled class="item-count"> {{ cake.amount }} </vs-button>
+            <vs-button :disabled="cake.amount == 10" success class="interact-button" @click="cake.amount++">
               <i class="bx bx-plus"></i>
             </vs-button>
           </vs-button-group>
-          <vs-button
-            :disabled="amount == 0"
-            primary
-            gradient
-            icon
-            @click="openNotification(cake, amount)"
-          >
+          <vs-button :disabled="cake.amount == 0" primary gradient icon @click="addToCart(cake, cake.amount)">
             <i class="bx bx-cart"></i>
           </vs-button>
         </template>
@@ -54,38 +36,43 @@
 
 <script>
 import Axios from 'axios';
+import Vue from 'vue';
 
 export default {
   name: 'Cakes',
   data() {
     return {
       cakes: null,
-      amount: 0,
     };
   },
   methods: {
-    openNotification(cake, amount) {
+    addToCart(cake, amount) {
+      cake.amount = 0;
       this.$vs.notification({
         color: 'success',
-        position: 'top-right',
+        position: 'bottom-right',
         title: 'Item added',
-        text:
-          amount + ' of ' + cake.title + ' was added to your shopping cart!',
+        text: amount + ' of ' + cake.title + ' was added to your shopping cart!',
       });
     },
     openDetailView(id) {
       this.$router.push('/cake/' + id);
     },
   },
-  mounted() {
-    Axios.get('http://localhost:3000/cakes')
-      .then((response) => (this.cakes = response.data))
-      .catch((error) => console.log(error));
+  async mounted() {
+    try {
+      this.cakes = await Axios.get('http://localhost:3000/cakes');
+    } catch (error) {
+      console.log(error);
+    }
+    this.cakes.data.forEach((cake) => {
+      Vue.set(cake, 'amount', 0);
+    });
   },
 };
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
 .cakes {
   display: flex;
   align-items: center;

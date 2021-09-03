@@ -3,6 +3,7 @@
     <vs-navbar not-line center-collapsed>
       <template #left>
         <!-- TODO: replace logo -->
+        <!-- det blir error i konsolen när $router.push() kallas. lägg .catch(() => {}) -->
         <img src="https://vuesax.com/logos/logo-vuesax-logotipo-vuesax-png-4.png" alt="" @click="$router.push('/')" />
       </template>
       <!-- TODO: put links in center -->
@@ -10,7 +11,7 @@
       <vs-navbar-item to="/cakes" :active="$route.path == '/cakes'"> Cakes </vs-navbar-item>
       <vs-navbar-item to="/about" :active="$route.path == '/about'"> About us </vs-navbar-item>
       <template #right>
-        <vs-button v-if="Object.keys(user).length === 0" flat @click="loginDialogOpen = !loginDialogOpen"
+        <vs-button flat v-if="Object.entries(user).length === 0" @click="loginDialogOpen = !loginDialogOpen"
           >Log in</vs-button
         >
         <!-- TODO: fix shopping cart visual glitch when logged in -->
@@ -18,7 +19,7 @@
           <i class="bx bx-cart"></i>
         </vs-button>
 
-        <vs-navbar-group v-if="Object.keys(user).length !== 0">
+        <vs-navbar-group v-if="Object.entries(user).length !== 0">
           <vs-button circle icon gradient color="primary">
             <i class="bx bx-user"></i>
           </vs-button>
@@ -45,14 +46,22 @@
           </template>
         </vs-input>
         <div class="flex">
-          <vs-checkbox v-model="saveAuth">Remember me</vs-checkbox>
+          <vs-checkbox v-model="rememberMe">Remember me</vs-checkbox>
           <a href="#" @click="forgotPasswordDialogOpen = !forgotPasswordDialogOpen">Forgot Password?</a>
         </div>
       </div>
 
       <template #footer>
         <div class="footer-dialog">
-          <vs-button block @click="login(email, password)"> Sign In </vs-button>
+          <vs-button
+            @click="
+              login({ email, password });
+              loginDialogOpen = !loginDialogOpen;
+            "
+            block
+          >
+            Sign In
+          </vs-button>
 
           <div class="new">
             New Here?
@@ -104,7 +113,8 @@
 </template>
 
 <script>
-import axios from 'axios';
+//import axios from 'axios';
+import { mapGetters, mapActions, mapMutations } from 'vuex';
 
 export default {
   name: 'Navbar',
@@ -113,16 +123,26 @@ export default {
       loginDialogOpen: false,
       createAccountDialogOpen: false,
       forgotPasswordDialogOpen: false,
-      user: {},
-      saveAuth: false,
+      rememberMe: true,
       email: 'Maximillia3@yahoo.com',
       password: 'ODcRSjVVgpsUnLM',
     };
   },
+  computed: {
+    ...mapGetters(['user']),
+  },
+  methods: {
+    ...mapActions({
+      login: 'setUser', // map `this.add({email, password})` to `this.$store.commit('setUser', {email, password})`
+    }),
+    ...mapMutations({
+      logout: 'forgetUser',
+    }),
+  },
   // Example user
   // Maximillia3@yahoo.com
   // ODcRSjVVgpsUnLM
-  methods: {
+  /*  methods: {
     async login(email, password) {
       let user;
       console.log('Logging in...');
@@ -135,7 +155,7 @@ export default {
       if (user.data[0].password === password) {
         this.user = user.data[0];
         console.log('Successfully logged in!');
-        if (this.saveAuth) {
+        if (this.rememberMe) {
           localStorage.setItem('user', JSON.stringify(user.data[0]));
         }
         this.loginDialogOpen = false;
@@ -152,7 +172,7 @@ export default {
       console.log(JSON.parse(localStorage.getItem('user')));
       this.user = JSON.parse(localStorage.getItem('user'));
     }
-  },
+  }, */
 };
 </script>
 

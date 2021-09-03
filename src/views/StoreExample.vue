@@ -1,6 +1,6 @@
 <template>
-  <div class="orders">
-      <h1>Orders</h1>
+  <div class="store-example">
+    <p>{{JSON.stringify(user)}}</p>
   </div>
 </template>
 
@@ -8,7 +8,7 @@
 import { mapGetters } from 'vuex'
 
 export default {
-  name: 'Orders',
+  name: 'Store Example',
   computed: {
     ...mapGetters([
       'user'
@@ -17,6 +17,4 @@ export default {
 };
 </script>
 
-<style lang="scss">
-
-</style>
+<style lang="scss"></style>
