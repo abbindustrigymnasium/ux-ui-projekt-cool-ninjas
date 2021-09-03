@@ -1,34 +1,18 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import App from './App.vue'
-import Home from './views/Home.vue'
-import Item from './views/Item.vue'
-import Buefy from 'buefy'
-import 'buefy/dist/buefy.css'
+import Vue from 'vue';
+import Vuesax from 'vuesax';
+import App from './App.vue';
+import router from './router';
+import 'vuesax/dist/vuesax.css';
+import 'boxicons';
+import 'boxicons/css/boxicons.min.css';
 
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
 
-Vue.use(Buefy)
-Vue.use(VueRouter)
-
-const routes = [{
-        path: '/',
-        name: 'Home',
-        component: Home
-    },
-    {
-        path: '/item/:id',
-        name: 'Item',
-        component: Item
-    }
-]
-
-const router = new VueRouter({
-    routes,
-    mode: 'history'
-})
+Vue.use(Vuesax, {
+  // ja
+});
 
 new Vue({
-    router,
-    render: h => h(App),
-}).$mount('#app')
+  router,
+  render: (h) => h(App),
+}).$mount('#app');
