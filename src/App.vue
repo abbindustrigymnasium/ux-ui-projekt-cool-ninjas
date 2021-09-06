@@ -26,7 +26,35 @@ export default {
 //   text-align: center;
 //   color: #2c3e50;
 // }
-@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+@font-face{
+  font-family: 'Poppins-Bold';
+  src: local("Poppins-Bold"),
+   url(./Fonts/Poppins-Bold.ttf) format("truetype");
+}
+@font-face{
+  font-family: 'Poppins-SemiBold';
+  src: local("Poppins-SemiBold"),
+   url(./Fonts/Poppins-SemiBold.ttf) format("truetype");
+}
+@font-face{
+  font-family: 'Poppins';
+  src: local("Poppins"),
+   url(./Fonts/Poppins-Regular.ttf) format("truetype");
+}
+@font-face {
+  font-family: 'Rembank';
+  src: local("Rembank"),
+   url(./Fonts/Rembank.otf) format("opentype")
+}
+
+#app {
+  font-family: 'Poppins-Bold';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  margin: 0;
+}
 
 body {
   font-family: Poppins, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans,
@@ -47,5 +75,5 @@ html::-webkit-scrollbar-track {
 html::-webkit-scrollbar-thumb {
   background: #4e4e4e;
   border-radius: 5px;
-}
-</style>
+} 
+</style> 
