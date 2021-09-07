@@ -213,7 +213,7 @@ export default {
     #ourstory::before{
         content: '';
         position: absolute;
-        bottom: -50px;
+        bottom: 0px;
         width: 100%;
         height: 200px;
         background: linear-gradient(to top, #628A9C, transparent);

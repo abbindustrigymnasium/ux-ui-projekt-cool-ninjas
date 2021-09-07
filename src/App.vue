@@ -1,18 +1,18 @@
 <template>
   <div class="app">
-    <navbar></navbar>
+    <Navbaren></Navbaren>
     <router-view />
     <!-- TODO: add footer -->
   </div>
 </template>
 
 <script>
-import Navbar from './components/Navbar.vue';
+import Navbaren from './components/Navbaren.vue';
 
 export default {
   name: 'App',
   components: {
-    Navbar,
+    Navbaren,
   },
 };
 </script>

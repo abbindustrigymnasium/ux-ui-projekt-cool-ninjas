@@ -99,6 +99,7 @@ export default {
   padding: 20px;
   border-radius: 5px 20px 20px 20px;
   gap: 20px;
+  margin-top: 200px;
 }
 
 .cakes img {
