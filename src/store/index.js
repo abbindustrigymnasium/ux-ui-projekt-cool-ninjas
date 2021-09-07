@@ -6,10 +6,14 @@ Vue.use(Vuex);
 const store = new Vuex.Store({
   state: {
     user: {},
+    cart: [],
   },
   getters: {
     user: (state) => {
       return state.user;
+    },
+    cart: (state) => {
+      return state.cart;
     },
   },
   mutations: {
@@ -25,6 +29,9 @@ const store = new Vuex.Store({
       // TODO: fixa buggen där .removeItem inte tar bort 'user' från localStorage, utan endast sätter den till user: {}
       localStorage.removeItem('user');
       state.user = {};
+    },
+    addToCart(state, cake) {
+      state.cart.push(cake); // {id: 3, amount: 2}
     },
   },
   actions: {

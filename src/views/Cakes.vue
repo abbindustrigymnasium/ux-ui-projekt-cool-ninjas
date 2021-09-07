@@ -25,7 +25,17 @@
               <i class="bx bx-plus"></i>
             </vs-button>
           </vs-button-group>
-          <vs-button :disabled="cake.amount == 0" primary gradient icon @click="addToCart(cake, cake.amount)">
+          <vs-button
+            :disabled="cake.amount == 0"
+            primary
+            gradient
+            icon
+            @click="
+              notifyCart(cake, cake.amount);
+              addToCart(cake);
+              cake.amount = 0;
+            "
+          >
             <i class="bx bx-cart"></i>
           </vs-button>
         </template>
@@ -37,6 +47,7 @@
 <script>
 import Axios from 'axios';
 import Vue from 'vue';
+import { mapMutations } from 'vuex';
 
 export default {
   name: 'Cakes',
@@ -46,8 +57,7 @@ export default {
     };
   },
   methods: {
-    addToCart(cake, amount) {
-      cake.amount = 0;
+    notifyCart(cake, amount) {
       this.$vs.notification({
         color: 'success',
         position: 'bottom-right',
@@ -55,6 +65,9 @@ export default {
         text: amount + ' of ' + cake.title + ' was added to your shopping cart!',
       });
     },
+    ...mapMutations([
+      'addToCart', // map `this.addToCart({email, password})` to `this.$store.commit('addToCart', {email, password})`
+    ]),
     openDetailView(id) {
       this.$router.push('/cake/' + id);
     },

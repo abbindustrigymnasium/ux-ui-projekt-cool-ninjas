@@ -133,7 +133,7 @@ export default {
   },
   methods: {
     ...mapActions({
-      login: 'setUser', // map `this.add({email, password})` to `this.$store.commit('setUser', {email, password})`
+      login: 'setUser', // map `this.login({email, password})` to `this.$store.commit('setUser', {email, password})`
     }),
     ...mapMutations({
       logout: 'forgetUser',
