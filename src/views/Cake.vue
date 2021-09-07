@@ -25,7 +25,4 @@ export default {
 </script>
 
 <style lang="scss">
-  .cake img {
-    filter: saturate(1.5);
-  }
 </style>

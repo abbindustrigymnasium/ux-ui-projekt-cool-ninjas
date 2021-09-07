@@ -23,6 +23,7 @@ new Vue({
 }).$mount('#app');
 
 // TODO: make localStorage optional if 'remember me' is unchecked
-store.subscribe((mutation, state) => {
+/* store.subscribe((mutation, state) => {
   localStorage.setItem('user', JSON.stringify(state));
 });
+ */
