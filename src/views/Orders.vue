@@ -2,6 +2,7 @@
   <div class="orders">
     <div class="orders-container">
       <h1>Orders</h1>
+      <p>Title: {{ getCakeById(2).title }}</p>
       <vs-table v-model="selected" v-if="orders">
         <template #thead>
           <vs-tr>
@@ -12,7 +13,7 @@
         <template #tbody>
           <vs-tr :key="order.id" v-for="order in orders.data" :data="order" :is-selected="selected == order">
             <vs-td>
-              {{ order.timestamp }}
+              {{ timeToString(order.timestamp) }}
             </vs-td>
             <vs-td> {{ order.totalPrice.toFixed(2) }} € </vs-td>
           </vs-tr>
@@ -29,15 +30,13 @@
         <template #tbody>
           <vs-tr :key="cake.cakeId" v-for="cake in selected.cakes" :data="cake">
             <!-- det borde funka. jag vet inte varför det inte funkar. fråga jockeimorgon. -->
-            <vs-td>
-              {{ getCakeById(cake.cakeId).title }}
-            </vs-td>
+            <vs-td> namn </vs-td>
             <vs-td> {{ cake.quantity }} </vs-td>
-            <vs-td> {{ getCakeById(cake.cakeId).price }} </vs-td>
+            <vs-td> pris </vs-td>
           </vs-tr>
         </template>
       </vs-table>
-      <vs-button @click="selected = null" v-if="selected" block
+      <vs-button @click="selected = null" v-if="selected" block danger
         >Clear selection<i class="bx bx-x-circle"></i>
       </vs-button>
     </div>
@@ -67,13 +66,19 @@ export default {
     }
   },
   methods: {
-    getCakeById: async function (id) {
+    async getCakeById(id) {
+      let cake;
       try {
-        let cake = await Axios.get(`http://localhost:3000/cakes?id=${id}`);
-        return cake.data[0];
+        cake = await Axios.get(`http://localhost:3000/cakes?id=${id}`);
+        console.log('Order: ' + cake.data[0].title);
       } catch (error) {
         console.error(error);
       }
+      return cake.data[0];
+    },
+    timeToString: function (string) {
+      let d = new Date(string);
+      return d.toLocaleString();
     },
   },
 };

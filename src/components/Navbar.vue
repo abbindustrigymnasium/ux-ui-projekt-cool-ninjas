@@ -4,7 +4,8 @@
       <template #left>
         <!-- TODO: replace logo -->
         <!-- det blir error i konsolen när $router.push() kallas. lägg .catch(() => {}) -->
-        <img src="https://vuesax.com/logos/logo-vuesax-logotipo-vuesax-png-4.png" alt="" @click="$router.push('/')" />
+        <!-- <img src="https://vuesax.com/logos/logo-vuesax-logotipo-vuesax-png-4.png" alt="" @click="$router.push('/')" /> -->
+        <img src="../assets/logo.png" alt="" @click="$router.push('/')" />
       </template>
       <!-- TODO: put links in center -->
       <vs-navbar-item to="/" :active="$route.path == '/'"> Home </vs-navbar-item>
@@ -139,40 +140,6 @@ export default {
       logout: 'forgetUser',
     }),
   },
-  // Example user
-  // Maximillia3@yahoo.com
-  // ODcRSjVVgpsUnLM
-  /*  methods: {
-    async login(email, password) {
-      let user;
-      console.log('Logging in...');
-      try {
-        user = await axios.get('http://localhost:3000/customers?email=' + email);
-      } catch (e) {
-        console.error(e);
-        return;
-      }
-      if (user.data[0].password === password) {
-        this.user = user.data[0];
-        console.log('Successfully logged in!');
-        if (this.rememberMe) {
-          localStorage.setItem('user', JSON.stringify(user.data[0]));
-        }
-        this.loginDialogOpen = false;
-      }
-    },
-    logout() {
-      this.user = {};
-      localStorage.removeItem('user');
-    },
-  },
-  mounted() {
-    // det är möjligt att vue har inbyggt stöd för objekt i localstorage, men jag fick det inte att funka så jag använder stringify
-    if (localStorage.getItem('user')) {
-      console.log(JSON.parse(localStorage.getItem('user')));
-      this.user = JSON.parse(localStorage.getItem('user'));
-    }
-  }, */
 };
 </script>
 
@@ -181,7 +148,7 @@ export default {
   margin-bottom: 50px;
   & img {
     cursor: pointer;
-    max-height: 20px;
+    max-height: 30px;
   }
 }
 
