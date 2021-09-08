@@ -9,9 +9,6 @@
     <div id="loginButtons">
         <button id="navButton" v-if="Object.keys(user).length === 0" flat @click="loginDialogOpen = !loginDialogOpen">Log in</button>
         <div v-if="Object.keys(user).length !== 0">
-            <button circle icon gradient color="primary" id="profileLogo">
-            <i class="bx bx-user"></i>
-            </button>
             <button @click="$router.push('/orders')" id="navButton"> Orders </button>
             <button @click="$router.push('/profile')" id="navButton" class="profileButton"> Profile </button>
             <button @click="logout()" id="navButton"> Log out </button>

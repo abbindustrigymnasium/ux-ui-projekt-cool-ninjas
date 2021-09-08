@@ -2,17 +2,19 @@
   <div class="app">
     <Navbaren></Navbaren>
     <router-view />
-    <!-- TODO: add footer -->
+    <Footer></Footer>
   </div>
 </template>
 
 <script>
 import Navbaren from './components/Navbaren.vue';
+import Footer from './views/Footer.vue';
 
 export default {
   name: 'App',
   components: {
     Navbaren,
+    Footer,
   },
 };
 </script>
@@ -52,15 +54,13 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
   margin: 0;
 }
 
 body {
   font-family: Poppins, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans,
     Droid Sans, Helvetica Neue, sans-serif;
-  background: #18191c;
-  color: #fff;
+  background: #6691A4;
   margin: 0;
 }
 
@@ -76,4 +76,9 @@ html::-webkit-scrollbar-thumb {
   background: #4e4e4e;
   border-radius: 5px;
 } 
+:root{
+  --vs-background: #5C8BA0 !important;
+  --vs-text: #FFF3E1 !important;
+  --vs-color: #FFF3E1 !important;
+  }
 </style> 

@@ -95,7 +95,7 @@ export default {
 .container {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  background: #1e2023;
+  background: #6691A4;
   padding: 20px;
   border-radius: 5px 20px 20px 20px;
   gap: 20px;
